@@ -42,14 +42,11 @@ while(<>) {
             $prefix{$prev_prefix} = 1;
             my $block = new Net::Netmask($prev_prefix);
             # "1.0.0.0","1.0.0.255","16777216","16777471","AU","Australia"
-            print '"'. $block->first() . '",';
-            print '"'. $block->last() . '",';
             my $first = new Net::IP ($block->first()) or die "Can't first IP";
             my $last = new Net::IP ($block->last()) or die "Can't last IP";
-            print '"'. $first->intip() . '",';
-            print '"'. $last->intip() . '",';          
-            print '"' . $prev_as . '",';
-            print '"' . $prev_as . '"';
+            
+            my @data = ($block->first(), $block->last(), $first->intip(), $last->intip(), $prev_as, $prev_as);
+            print join ',' map { "\"$_\""} @data;          
             print "\n";
         }
     }
