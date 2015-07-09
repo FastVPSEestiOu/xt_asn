@@ -46,7 +46,7 @@ while(<>) {
             my $last = new Net::IP ($block->last()) or die "Can't last IP";
             
             my @data = ($block->first(), $block->last(), $first->intip(), $last->intip(), $prev_as, $prev_as);
-            print join ',' map { "\"$_\""} @data;          
+            print join ',', map { "\"$_\""} @data;          
             print "\n";
         }
     }
